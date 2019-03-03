@@ -3,12 +3,30 @@ using System.Linq;
 
 namespace Soundex_CSharp_NUnit
 {
-    public class SoundexAlgorithm
+    public class SoundexAlgorithm : IAlgorithm
     {
-        SoundexData soundexData = new SoundexData();
+        SoundexData soundexData;
+        private IAlgorithm _algorithm;
+
+        public SoundexAlgorithm()
+        {
+            soundexData = new SoundexData();      
+        }
+
+        public SoundexAlgorithm(SoundexData data)
+        {
+            _algorithm = new SoundexAlgorithm();
+            soundexData = data;
+        }
+
+        public SoundexAlgorithm(SoundexData data, IAlgorithm algorithm)
+        {
+            soundexData = data;
+            _algorithm = algorithm;
+        }
 
         public string Encode(string word)
-        {
+        {            
             if (String.IsNullOrEmpty(word))
                 return "0000";
             if (word.Length == 1)
@@ -17,7 +35,9 @@ namespace Soundex_CSharp_NUnit
                 return "0000";
 
             string lowerCaseWord = word.ToLower();
-            string encodedWord = EncodeWord(lowerCaseWord);
+            string encodedWord = _algorithm.EncodeWord(lowerCaseWord);
+            encodedWord = EncodeWord(lowerCaseWord);
+            //var test = _algorithm.EncodeWord("ABcd");
             TrimString(ref encodedWord);
 
             return encodedWord;
@@ -36,7 +56,7 @@ namespace Soundex_CSharp_NUnit
             }
         }
 
-        public string EncodeWord(string word)
+        virtual public string EncodeWord(string word)
         {
             string encodedWord = "";
             encodedWord += word[0].ToString();
@@ -85,5 +105,11 @@ namespace Soundex_CSharp_NUnit
 
             return false;
         }
+    }  
+
+    public interface IAlgorithm
+    {
+        string Encode(string word);
+        string EncodeWord(string word);
     }
 }
