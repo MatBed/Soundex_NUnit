@@ -9,7 +9,7 @@ namespace SoundexTests
         [Test]
         public void WhenTheWordIsEmptyThenReturn0000()
         {
-            SoundexData soundexData = new SoundexData();
+            IAlgorithmData soundexData = new SoundexData();
             SoundexAlgorithm soundex = new SoundexAlgorithm(soundexData);
 
             string expectedValue = soundex.Encode("");
@@ -20,7 +20,7 @@ namespace SoundexTests
         [Test]
         public void WhentTheWordIsNullThenReturn0000()
         {
-            SoundexData soundexData = new SoundexData();
+            IAlgorithmData soundexData = new SoundexData();
             SoundexAlgorithm soundex = new SoundexAlgorithm(soundexData);
 
             string expectedValue = soundex.Encode(null);
@@ -31,7 +31,7 @@ namespace SoundexTests
         [Test]
         public void WhenTheWordHaveOneCharThenFillTheWordBy0()
         {
-            SoundexData soundexData = new SoundexData();
+            IAlgorithmData soundexData = new SoundexData();
             SoundexAlgorithm soundex = new SoundexAlgorithm(soundexData);
 
             string expectedValue = soundex.Encode("w");
@@ -42,7 +42,7 @@ namespace SoundexTests
         [Test]
         public void WhenTheWordHaveUpperCaseThenChancgeToLowerCase()
         {
-            SoundexData soundexData = new SoundexData();
+            IAlgorithmData soundexData = new SoundexData();
             SoundexAlgorithm soundex = new SoundexAlgorithm(soundexData);
 
             string expectedValue = soundex.Encode("ABCD");
@@ -53,7 +53,7 @@ namespace SoundexTests
         [Test]
         public void WhenTheWordHaveFourCharsWithDifferentNumbersThenReturnEncodedWord()
         {
-            SoundexData soundexData = new SoundexData();
+            IAlgorithmData soundexData = new SoundexData();
             SoundexAlgorithm soundex = new SoundexAlgorithm(soundexData);
 
             string expectedValue = soundex.Encode("bcdm");
@@ -64,7 +64,7 @@ namespace SoundexTests
         [Test]
         public void WhenTheWordHaveMoreThanOneCharAndLessThanFourCharsThenAdd0()
         {
-            SoundexData soundexData = new SoundexData();
+            IAlgorithmData soundexData = new SoundexData();
             SoundexAlgorithm soundex = new SoundexAlgorithm(soundexData);
 
             string expectedValue = soundex.Encode("an");
@@ -75,7 +75,7 @@ namespace SoundexTests
         [Test]
         public void WhenTheWordHaveMoreThanFourCharsThenRemoveRedundantChars()
         {
-            SoundexData soundexData = new SoundexData();
+            IAlgorithmData soundexData = new SoundexData();
             SoundexAlgorithm soundex = new SoundexAlgorithm(soundexData);
 
             string expectedValue = soundex.Encode("anrtzv");
@@ -86,7 +86,7 @@ namespace SoundexTests
         [Test]
         public void WhenTheWordHaveNeighboringCharsWithTheSameNumberThenRemoveAllThisCharsWitchoutFirst()
         {
-            SoundexData soundexData = new SoundexData();
+            IAlgorithmData soundexData = new SoundexData();
             SoundexAlgorithm soundex = new SoundexAlgorithm(soundexData);
 
             string expectedValue = soundex.Encode("accb");
@@ -97,7 +97,7 @@ namespace SoundexTests
         [Test]
         public void WhenTheWordHaveCharsWhichDoNotExistInDictionaryThenRemoveThisChars()
         {
-            SoundexData soundexData = new SoundexData();
+            IAlgorithmData soundexData = new SoundexData();
             SoundexAlgorithm soundex = new SoundexAlgorithm(soundexData);
 
             string expectedValue = soundex.Encode("acob");
@@ -108,7 +108,7 @@ namespace SoundexTests
         [Test]
         public void WhenTheWordHaveSpecialCharsThenReplaceThisCharsTo0()
         {
-            SoundexData soundexData = new SoundexData();
+            IAlgorithmData soundexData = new SoundexData();
             SoundexAlgorithm soundex = new SoundexAlgorithm(soundexData);
 
             string expectedValue = soundex.Encode("!%#&");
@@ -119,7 +119,7 @@ namespace SoundexTests
         [Test]
         public void WhenInTheWordTwoLettersWithTheSameNumberAreSeparatedByWThenEncodeLikeOneNumber()
         {
-            SoundexData soundexData = new SoundexData();
+            IAlgorithmData soundexData = new SoundexData();
             SoundexAlgorithm soundex = new SoundexAlgorithm(soundexData);
 
             string expectedValue = soundex.Encode("bgwjlm");
@@ -130,7 +130,7 @@ namespace SoundexTests
         [Test]
         public void WhenInTheWordTwoLettersWithTheSameNumberAreSeparatedByHThenEncodeLikeOneNumber()
         {
-            SoundexData soundexData = new SoundexData();
+            IAlgorithmData soundexData = new SoundexData();
             SoundexAlgorithm soundex = new SoundexAlgorithm(soundexData);
 
             string expectedValue = soundex.Encode("bghjlm");
@@ -141,7 +141,7 @@ namespace SoundexTests
         [Test]
         public void WhenInTheWordTwoLettersWithTheSameNumberAreSeparatedByVowelThenEncodeTwice()
         {
-            SoundexData soundexData = new SoundexData();
+            IAlgorithmData soundexData = new SoundexData();
             SoundexAlgorithm soundex = new SoundexAlgorithm(soundexData);
 
             string expectedValue = soundex.Encode("bditv");
@@ -153,7 +153,7 @@ namespace SoundexTests
         [TestCase("Rupert")]
         public void WhentTheWordIsRobertOrRupertThenReturnR163(string word)
         {
-            SoundexData soundexData = new SoundexData();
+            IAlgorithmData soundexData = new SoundexData();
             SoundexAlgorithm soundex = new SoundexAlgorithm(soundexData);
 
             string expectedValue = soundex.Encode(word);
@@ -164,7 +164,7 @@ namespace SoundexTests
         [TestCase("Rubin")]
         public void WhentTheWordIsRubinThenReturnR150(string word)
         {
-            SoundexData soundexData = new SoundexData();
+            IAlgorithmData soundexData = new SoundexData();
             SoundexAlgorithm soundex = new SoundexAlgorithm(soundexData);
 
             string expectedValue = soundex.Encode(word);
@@ -176,7 +176,7 @@ namespace SoundexTests
         [TestCase("Ashcroft")]
         public void WhentTheWordIsAshcraftOrAshcroftThenReturnA261(string word)
         {
-            SoundexData soundexData = new SoundexData();
+            IAlgorithmData soundexData = new SoundexData();
             SoundexAlgorithm soundex = new SoundexAlgorithm(soundexData);
 
             string expectedValue = soundex.Encode(word);
@@ -187,7 +187,7 @@ namespace SoundexTests
         [TestCase("Tymczak")]
         public void WhentTheWordIsTymczakThenReturnT522(string word)
         {
-            SoundexData soundexData = new SoundexData();
+            IAlgorithmData soundexData = new SoundexData();
             SoundexAlgorithm soundex = new SoundexAlgorithm(soundexData);
 
             string expectedValue = soundex.Encode(word);
@@ -198,7 +198,7 @@ namespace SoundexTests
         [TestCase("Pfister")]
         public void WhentTheWordIsPfisterThenReturnP123(string word)
         {
-            SoundexData soundexData = new SoundexData();
+            IAlgorithmData soundexData = new SoundexData();
             SoundexAlgorithm soundex = new SoundexAlgorithm(soundexData);
 
             string expectedValue = soundex.Encode(word);
@@ -209,7 +209,7 @@ namespace SoundexTests
         [TestCase("Honeyman")]
         public void WhentTheWordIsHoneymanThenReturnH555(string word)
         {
-            SoundexData soundexData = new SoundexData();
+            IAlgorithmData soundexData = new SoundexData();
             SoundexAlgorithm soundex = new SoundexAlgorithm(soundexData);
 
             string expectedValue = soundex.Encode(word);
@@ -222,7 +222,7 @@ namespace SoundexTests
         {
             int timesCalled = 0;
 
-            SoundexData soundexData = new SoundexData();
+            IAlgorithmData soundexData = new SoundexData();
             var soundexMock = new Mock<IAlgorithm>();
             SoundexAlgorithm soundex = new SoundexAlgorithm(soundexData, soundexMock.Object);
 

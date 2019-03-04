@@ -5,7 +5,7 @@ namespace Soundex_CSharp_NUnit
 {
     public class SoundexAlgorithm : IAlgorithm
     {
-        SoundexData soundexData;
+        IAlgorithmData soundexData;
         private IAlgorithm _algorithm;
 
         public SoundexAlgorithm()
@@ -13,13 +13,13 @@ namespace Soundex_CSharp_NUnit
             soundexData = new SoundexData();      
         }
 
-        public SoundexAlgorithm(SoundexData data)
+        public SoundexAlgorithm(IAlgorithmData data)
         {
             _algorithm = new SoundexAlgorithm();
             soundexData = data;
         }
 
-        public SoundexAlgorithm(SoundexData data, IAlgorithm algorithm)
+        public SoundexAlgorithm(IAlgorithmData data, IAlgorithm algorithm)
         {
             soundexData = data;
             _algorithm = algorithm;
@@ -37,7 +37,6 @@ namespace Soundex_CSharp_NUnit
             string lowerCaseWord = word.ToLower();
             string encodedWord = _algorithm.EncodeWord(lowerCaseWord);
             encodedWord = EncodeWord(lowerCaseWord);
-            //var test = _algorithm.EncodeWord("ABcd");
             TrimString(ref encodedWord);
 
             return encodedWord;
