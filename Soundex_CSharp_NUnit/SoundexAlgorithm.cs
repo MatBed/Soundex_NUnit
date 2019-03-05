@@ -5,7 +5,7 @@ namespace Soundex_CSharp_NUnit
 {
     public class SoundexAlgorithm : IAlgorithm
     {
-        IAlgorithmData soundexData;
+        private IAlgorithmData soundexData;
         private IAlgorithm _algorithm;
 
         public SoundexAlgorithm()
