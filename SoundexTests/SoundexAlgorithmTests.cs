@@ -171,20 +171,13 @@ namespace SoundexTests
         }
 
         [Test]
-        public void WhenCallToEncodeMethodThenTheNumberOfCalledToEncodeWordMethodIsOne()
+        public void WhenCallToSaveMethodThenTheNumberOfCalledToSaveWordMethodIsOne()
         {
-            int timesCalled = 0;
+            var soundexMock = new Mock<ISaveData>();
+            var dataContainer = new DataContaioner(soundexMock.Object);
+            dataContainer.Save("abcd");
 
-            var soundexMock = new Mock<IAlgorithm>();
-            soundex = new SoundexAlgorithm(soundexData, soundexMock.Object);
-
-            soundexMock
-                .Setup(x => x.EncodeWord(It.IsAny<string>()))
-                .Callback(() => timesCalled++);
-
-            soundex.Encode("abcd");
-
-            Assert.That(timesCalled, Is.EqualTo(1));
+            soundexMock.Verify(m => m.SaveWord(It.IsAny<string>()), Times.Once);
         }
     }
 }
